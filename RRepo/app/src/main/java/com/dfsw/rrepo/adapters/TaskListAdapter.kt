@@ -8,7 +8,8 @@ import com.dfsw.rrepo.R
 import com.dfsw.rrepo.data.model.Task
 import kotlinx.android.synthetic.main.tasks_row.view.*
 
-class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
+class TaskListAdapter(private val clickListener: (Task) -> Unit ) :
+    RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     private val tasks: MutableList<Task> = mutableListOf()
 
@@ -20,7 +21,7 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     override fun getItemCount() = tasks.size
 
     override fun onBindViewHolder(taskViewHolder: TaskViewHolder, position: Int) {
-        taskViewHolder.bind(tasks[position])
+        taskViewHolder.bind(tasks[position], clickListener)
     }
 
     fun addTask(task: Task) {
@@ -32,8 +33,9 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     //ViewHolder Class
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(task: Task) {
+        fun bind(task: Task, clickListener: (Task) -> Unit) {
             itemView.taskTitle.text = task.title
+            itemView.setOnClickListener { clickListener(task) }
         }
     }
 }

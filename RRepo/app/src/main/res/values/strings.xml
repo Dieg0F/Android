@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RRepo</string>
+    <string name="remove_task">Remove Task</string>
 </resources>

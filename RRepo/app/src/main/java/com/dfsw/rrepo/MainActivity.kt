@@ -1,5 +1,6 @@
 package com.dfsw.rrepo
 
+import android.arch.lifecycle.Observer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -41,35 +42,27 @@ class MainActivity : AppCompatActivity() {
             return@OnEditorActionListener false
         })
 
-        taskListAdapter = TaskListAdapter()
+        taskListAdapter = TaskListAdapter {
+            val taskId = it.id
+            startActivity(DetailActivity.launchIntent(this, taskId))
+        }
+
         taskList.layoutManager = LinearLayoutManager(this)
         taskList.adapter = taskListAdapter
 
-        refreshTaskList()
+        taskDao.getTasks().observe(this, Observer {
+            it?.forEach { task -> taskListAdapter.addTask(task) }
+        })
     }
 
     private fun addTask() {
         val title = taskTitleInput.text.toString()
-
         if (title.isBlank()) {
             Snackbar.make(toolbar, "Task title is required", Snackbar.LENGTH_SHORT).show()
             return
         }
-
         val task = Task(title = title)
 
-        thread {
-            taskDao.insert(task)
-            refreshTaskList()
-        }
+        thread { taskDao.insert(task) }
     }
-
-    private fun refreshTaskList() {
-        thread {
-            val tasks = taskDao.getTesks()
-            runOnUiThread { tasks.forEach { taskListAdapter.addTask(it) }
-            }
-        }
-    }
-
 }

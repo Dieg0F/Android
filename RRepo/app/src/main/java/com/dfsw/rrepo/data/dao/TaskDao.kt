@@ -1,5 +1,6 @@
 package com.dfsw.rrepo.data.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -15,5 +16,8 @@ interface TaskDao {
     fun insertList(tasks: List<Task>): List<Long>
 
     @Query (value = "SELECT * FROM task")
-    fun getTesks(): List<Task>
+    fun getTasks(): LiveData<List<Task>>
+
+    @Query (value = "SELECT * FROM task WHERE task.id == :taskId")
+    fun getTask(taskId: Int)
 }
