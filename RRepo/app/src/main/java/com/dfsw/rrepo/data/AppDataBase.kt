@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import com.dfsw.rrepo.data.dao.TaskDao
 import com.dfsw.rrepo.data.model.Task
 
 @Database(
@@ -12,6 +13,8 @@ import com.dfsw.rrepo.data.model.Task
     ]
 )
 abstract class AppDataBase : RoomDatabase() {
+
+    abstract fun taskDao(): TaskDao
 
     companion object {
         @Volatile private var INSTANCE: AppDataBase? = null

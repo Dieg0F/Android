@@ -24,8 +24,10 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     }
 
     fun addTask(task: Task) {
-        tasks.add(task)
-        notifyItemInserted(tasks.size)
+        if (!tasks.contains(task)) {
+            tasks.add(task)
+            notifyItemInserted(tasks.size)
+        }
     }
 
     //ViewHolder Class
