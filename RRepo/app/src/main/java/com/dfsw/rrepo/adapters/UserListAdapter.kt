@@ -7,22 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dfsw.rrepo.R
-import com.dfsw.rrepo.data.model.Task
+import com.dfsw.rrepo.data.model.User
 import kotlinx.android.synthetic.main.tasks_row.view.*
 
 
-class TaskListAdapter(private val clickListener: (Task) -> Unit) :
-    ListAdapter<Task, TaskListAdapter.ViewHolder>(DIFF_UTIL_CALLBACK) {
+class UserListAdapter(private val clickListener: (User) -> Unit) :
+    ListAdapter<User, UserListAdapter.ViewHolder>(DIFF_UTIL_CALLBACK) {
 
     companion object {
+        val DIFF_UTIL_CALLBACK = object : DiffUtil.ItemCallback<User>() {
 
-        val DIFF_UTIL_CALLBACK = object : DiffUtil.ItemCallback<Task>() {
-
-            override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem == newItem
             }
         }
@@ -39,9 +38,8 @@ class TaskListAdapter(private val clickListener: (Task) -> Unit) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(task: Task, clickListener: (Task) -> Unit) {
-            itemView.taskTitle.text = task.title
-            itemView.setOnClickListener { clickListener(task) }
+        fun bind(user: User, clickListener: (User) -> Unit) {
+            itemView.taskTitle.text = user.name
         }
 
     }

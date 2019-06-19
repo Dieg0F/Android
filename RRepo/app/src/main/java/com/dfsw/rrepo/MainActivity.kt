@@ -1,10 +1,13 @@
 package com.dfsw.rrepo
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
 import android.widget.TextView
 import com.dfsw.rrepo.adapters.TaskListAdapter
@@ -50,9 +53,24 @@ class MainActivity : AppCompatActivity() {
         taskList.layoutManager = LinearLayoutManager(this)
         taskList.adapter = taskListAdapter
 
-        taskDao.getTasks().observe(this, Observer {
-            it?.forEach { task -> taskListAdapter.addTask(task) }
+        taskDao.getTasks().observe(this, Observer<List<Task>> {
+            taskListAdapter.submitList(it)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_task_list, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId) {
+            R.id.menu_item_add_user -> {
+                startActivity(Intent(this, UsersActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun addTask() {
