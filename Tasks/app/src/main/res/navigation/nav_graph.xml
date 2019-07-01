@@ -4,7 +4,7 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
             app:startDestination="@id/to_do_list">
 
-    <fragment android:id="@+id/to_do_list" android:name="com.dfsw.tasks.app.todolist.ToDoList" android:label="fragment_to_do_list"
+    <fragment android:id="@+id/to_do_list" android:name="com.dfsw.tasks.app.todolist.ToDoListFragment" android:label="fragment_to_do_list"
               tools:layout="@layout/fragment_to_do_list">
         <action android:id="@+id/action_toDoList_to_createTask" app:destination="@id/create_task"/>
         <action android:id="@+id/action_toDoList_to_editTask" app:destination="@id/edit_task"/>

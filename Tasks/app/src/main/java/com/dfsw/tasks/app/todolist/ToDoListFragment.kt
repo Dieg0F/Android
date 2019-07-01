@@ -10,10 +10,12 @@ import com.dfsw.tasks.R
 import com.dfsw.tasks.app.adapters.TaskRecyclerViewAdapter
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_to_do_list.*
+import org.koin.android.ext.android.inject
 
-class ToDoList : Fragment() {
+class ToDoListFragment : Fragment() {
 
     private var taskList: MutableList<Task> = mutableListOf()
+    private val toDoListViewModel: ToDoListViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_to_do_list, container, false)
