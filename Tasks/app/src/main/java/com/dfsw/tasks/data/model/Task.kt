@@ -1,9 +1,13 @@
 package com.dfsw.tasks.data.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity(tableName = "task")
 data class Task(
-    val id: Int = 0,
-    val title: String = "",
-    val information: String = "",
-    val status: String = "",
-    val isCompleted: Boolean = false
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    var title: String = "",
+    var information: String = "",
+    var status: String = "",
+    var isCompleted: Boolean = false
 )

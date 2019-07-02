@@ -4,14 +4,14 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.dfsw.tasks.data.model.Task
 
-@Entity
+@Dao
 interface TaskDao {
 
     @Insert
     fun insert(task: Task) : Long
 
     @Update
-    fun update(task: Task) : LiveData<Task>
+    fun update(task: Task)
 
     @Delete
     fun delete(task: Task)
@@ -21,4 +21,7 @@ interface TaskDao {
 
     @Query("SELECT * FROM task WHERE isCompleted == :isCompleted")
     fun getTaskByCompleted(isCompleted: Boolean) : LiveData<MutableList<Task>>
+
+    @Query (value = "SELECT * FROM task WHERE id == :taskId")
+    fun getTask(taskId: Int) : LiveData<Task>
 }

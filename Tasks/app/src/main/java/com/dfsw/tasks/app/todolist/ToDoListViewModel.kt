@@ -1,30 +1,13 @@
 package com.dfsw.tasks.app.todolist
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
-import com.dfsw.tasks.data.AppDataBase
-import com.dfsw.tasks.data.model.Task
+import com.dfsw.tasks.data.repository.RoomRepository
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
-class ToDoListViewModel : ViewModel() {
+class ToDoListViewModel : ViewModel(), KoinComponent {
 
-    private val profilesLiveData: LiveData<MutableList<Task>>
-    private val dataBase: AppDataBase by inject
-    private var lifecycleOwner: LifecycleOwner? = null
+    private val roomRepository: RoomRepository by inject()
 
-    fun setLifecycle(lifecycleOwner: LifecycleOwner) {
-        this.lifecycleOwner = lifecycleOwner
-    }
-
-    fun getAllTasks(profilesJson: String) {
-        val data = dataBase.taskDao().getAllTasks()
-
-        lifecycleOwner?.let {
-            data.observe( it, Observer<MutableList<Task>> {  })
-        }
-    }
-
-    fun observableTasksLiveData() = profilesLiveData
-
+    fun getAllTasks() = roomRepository.getAllTasks()
 }

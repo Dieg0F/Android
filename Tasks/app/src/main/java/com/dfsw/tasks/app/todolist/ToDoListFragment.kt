@@ -1,5 +1,6 @@
 package com.dfsw.tasks.app.todolist
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,8 +12,9 @@ import com.dfsw.tasks.app.adapters.TaskRecyclerViewAdapter
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_to_do_list.*
 import org.koin.android.ext.android.inject
+import org.koin.standalone.KoinComponent
 
-class ToDoListFragment : Fragment() {
+class ToDoListFragment : Fragment(), KoinComponent {
 
     private var taskList: MutableList<Task> = mutableListOf()
     private val toDoListViewModel: ToDoListViewModel by inject()
@@ -28,7 +30,18 @@ class ToDoListFragment : Fragment() {
     }
 
     private fun setView() {
+        getTasks()
         setRecyclerView()
+    }
+
+    private fun getTasks() {
+        toDoListViewModel.getAllTasks().observe(this, Observer { tasks ->
+            if (tasks.isNullOrEmpty()) {
+                // Do something
+            } else {
+                taskList = tasks
+            }
+        })
     }
 
     private fun setRecyclerView() {
@@ -41,4 +54,5 @@ class ToDoListFragment : Fragment() {
         task_recycler_view.layoutManager = LinearLayoutManager(requireContext())
         task_recycler_view.adapter = TaskRecyclerViewAdapter(taskList)
     }
+
 }
