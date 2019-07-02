@@ -8,7 +8,7 @@ import com.dfsw.tasks.R
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.row_item_task.view.*
 
-class TaskRecyclerViewAdapter(private val taskList: MutableList<Task>) : RecyclerView.Adapter<TaskViewHolder>() {
+class TaskRecyclerViewAdapter(private var taskList: MutableList<Task>) : RecyclerView.Adapter<TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,6 +20,11 @@ class TaskRecyclerViewAdapter(private val taskList: MutableList<Task>) : Recycle
     }
 
     override fun getItemCount() = taskList.size
+
+    fun submitList(newTaskList: MutableList<Task>) {
+        this.taskList = newTaskList
+        notifyDataSetChanged()
+    }
 }
 
 class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
