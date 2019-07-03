@@ -1,6 +1,7 @@
 package com.dfsw.tasks.di.module
 
 import com.dfsw.tasks.app.createtask.CreateTaskViewModel
+import com.dfsw.tasks.app.edittask.EditTaskViewModel
 import com.dfsw.tasks.app.taskdetails.TaskDetailsViewModel
 import com.dfsw.tasks.app.todolist.ToDoListViewModel
 import com.google.gson.Gson
@@ -12,4 +13,5 @@ val applicationModule = module {
     viewModel { ToDoListViewModel() }
     viewModel { CreateTaskViewModel() }
     viewModel { TaskDetailsViewModel() }
+    viewModel { EditTaskViewModel() }
 }

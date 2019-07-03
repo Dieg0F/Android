@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
             app:startDestination="@id/to_do_list">
 
     <fragment android:id="@+id/to_do_list" android:name="com.dfsw.tasks.app.todolist.ToDoListFragment"
               android:label="fragment_to_do_list"
               tools:layout="@layout/fragment_to_do_list">
-        <action android:id="@+id/action_toDoList_to_editTask" app:destination="@id/edit_task"/>
-        <action android:id="@+id/action_toDoList_to_tasksDetails" app:destination="@id/tasks_details"/>
+        <action android:id="@+id/action_toDoList_to_tasksDetails" app:destination="@id/tasks_details"
+                app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment android:id="@+id/done_list" android:name="com.dfsw.tasks.app.donelist.DoneList"
               android:label="fragment_done_list"
               tools:layout="@layout/fragment_done_list">
-        <action android:id="@+id/action_doneList_to_tasksDetails" app:destination="@id/tasks_details"/>
-        <action android:id="@+id/action_doneList_to_editTask" app:destination="@id/edit_task"/>
+        <action android:id="@+id/action_doneList_to_tasksDetails" app:destination="@id/tasks_details"
+                app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment android:id="@+id/tasks_details" android:name="com.dfsw.tasks.app.taskdetails.TaskDetailsFragment"
-              android:label="fragment_tasks_details" tools:layout="@layout/fragment_task_details"/>
+              android:label="fragment_tasks_details" tools:layout="@layout/fragment_task_details">
+        <action android:id="@+id/action_tasks_details_to_edit_task" app:destination="@id/edit_task"
+                app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment android:id="@+id/create_task" android:name="com.dfsw.tasks.app.createtask.CreateTaskFragment"
               android:label="fragment_create_task"
               tools:layout="@layout/fragment_create_task"/>
 
-    <fragment android:id="@+id/edit_task" android:name="com.dfsw.tasks.app.edittask.EditTask"
+    <fragment android:id="@+id/edit_task" android:name="com.dfsw.tasks.app.edittask.EditTaskFragment"
               android:label="fragment_edit_task"
               tools:layout="@layout/fragment_edit_task"/>
 </navigation>

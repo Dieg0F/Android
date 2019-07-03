@@ -7,4 +7,6 @@
     <!-- BottomNavigation Menu item -->
     <string name="to_do_list_bottom_menu_icon_text">To Do</string>
     <string name="done_list_bottom_menu_icon_text">Done</string>
+    <string name="edit_task_option">Edit Task</string>
+    <string name="remove_task_option">Remove Task</string>
 </resources>

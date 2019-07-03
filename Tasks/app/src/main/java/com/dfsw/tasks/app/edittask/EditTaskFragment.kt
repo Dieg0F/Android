@@ -1,5 +1,6 @@
-package com.dfsw.tasks.app.createtask
+package com.dfsw.tasks.app.edittask
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
+import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
 import com.dfsw.tasks.common.KeyboardHelper
 import com.dfsw.tasks.common.Logger
 import com.dfsw.tasks.data.model.Task
@@ -17,55 +19,76 @@ import org.jetbrains.anko.runOnUiThread
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
-
-class CreateTaskFragment : Fragment(), KoinComponent  {
+class EditTaskFragment : Fragment(), KoinComponent  {
 
     companion object {
         val TAG = Logger.TAG
     }
 
-    private val createTaskViewModel: CreateTaskViewModel by inject()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(false)
-        super.onCreate(savedInstanceState)
-    }
+    private val editTaskViewModel: EditTaskViewModel by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView")
         super.onCreateView(inflater, container, savedInstanceState)
         setHasOptionsMenu(false)
-        return inflater.inflate(R.layout.fragment_create_task, container, false)
+        return inflater.inflate(R.layout.fragment_edit_task, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        setView()
+        getTask()
     }
 
-    private fun setView() {
+    private fun getTask() {
+        Log.d(TAG, "getTaskById")
+        val lifecycleOwner = this
+        val taskId = requestArgs()
+        context?.runOnUiThread {
+            editTaskViewModel.getTaskById(taskId).observe(lifecycleOwner, Observer<Task> {
+                if (it == null) {
+                    return@Observer
+                }
+                setView(it)
+            })
+        }
+    }
+
+    private fun requestArgs(): Int {
+        var taskId = 0
+        arguments?.getInt(ARGS_TASK_ID)?.let {
+            taskId = it
+        }
+        Log.d(TAG, "requestArgs : $taskId")
+        return taskId
+    }
+
+    private fun setView(task: Task) {
         Log.d(TAG, "setView")
+
+        et_task_title.setText(task.title)
+        et_task_information.setText(task.information)
+
         floatingActionButton.setOnClickListener {
 
-            val task = Task()
             task.title = et_task_title.text.toString()
             task.information = et_task_information.text.toString()
-            task.status = "NEW"
+            task.status = "UPDATED"
 
-            createTaskViewModel.insert(task) { success ->
+            editTaskViewModel.update(task) { success ->
                 context?.runOnUiThread {
                     val message = if (success) {
                         view?.findNavController()?.navigateUp()
-                        "Success!"
+                        "Edit Success!"
                     } else {
-                        "Fail!"
+                        "Edit Fail!"
                     }
 
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
     }
 
     override fun onStop() {

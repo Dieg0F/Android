@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.dfsw.tasks.R
 import com.dfsw.tasks.app.adapters.TaskRecyclerViewAdapter
 import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
@@ -30,13 +31,14 @@ class ToDoListFragment : Fragment(), KoinComponent {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView")
+        super.onCreateView(inflater, container, savedInstanceState)
+        setHasOptionsMenu(false)
         return inflater.inflate(R.layout.fragment_to_do_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
         setView()
     }
 
@@ -75,9 +77,7 @@ class ToDoListFragment : Fragment(), KoinComponent {
     private fun toTaskDetails(taskId: Int) {
         Log.d(TAG, "toTaskDetails, Task Id : $taskId")
         val bundle = Bundle()
-        bundle.putString(ARGS_TASK_ID, taskId.toString())
-        Navigation
-            .findNavController(requireActivity(), R.id.my_nav_host_fragment)
-            .navigate(R.id.tasks_details, bundle)
+        bundle.putInt(ARGS_TASK_ID, taskId)
+        view?.findNavController()?.navigate(R.id.tasks_details, bundle)
     }
 }

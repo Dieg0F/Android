@@ -10,7 +10,6 @@ import kotlin.concurrent.thread
 
 class CreateTaskViewModel : ViewModel(), KoinComponent {
 
-
     private val roomRepository: RoomRepository by inject()
 
     fun insert(task: Task, callback: ((success: Boolean) -> Unit)) {

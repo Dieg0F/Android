@@ -4,10 +4,10 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.dfsw.tasks.R
 import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
 import com.dfsw.tasks.common.Logger
@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_task_details.*
 import org.jetbrains.anko.runOnUiThread
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
+import kotlin.concurrent.thread
 
 class TaskDetailsFragment : Fragment(), KoinComponent {
 
@@ -28,6 +29,8 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "onCreateView")
+        setHasOptionsMenu(true)
+        super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_task_details, container, false)
     }
 
@@ -37,14 +40,34 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
         getTask()
     }
 
-    private fun requestArgs() : Int {
-        Log.d(TAG, "requestArgs")
-        val bundle = Bundle()
-        Log.d("TAGG", "${bundle.getInt(ARGS_TASK_ID, Int.MIN_VALUE)}")
-        Log.d("TAGG", "${bundle.get(ARGS_TASK_ID)}")
-        Log.d("TAGG", "${bundle.getBundle(ARGS_TASK_ID)}")
-        Log.d("TAGG", "${bundle.getString(ARGS_TASK_ID)} ")
-        return 0
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        Log.d(TAG, "onOptionsItemSelected")
+        this.task?.let { task ->
+            when (item?.itemId) {
+                R.id.edit_task_option -> {
+                    Log.d(TAG, "onOptionsItemSelected : edit_task_option")
+                    toEditTask(task.id)
+                }
+                R.id.remove_task_option -> {
+                    Log.d(TAG, "onOptionsItemSelected : remove_task_option")
+
+                    taskDetailsViewModel.deleteTask(task) {
+                        Log.d(TAG, "onOptionsItemSelected : task removed")
+                        view?.findNavController()?.popBackStack()
+                    }
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun requestArgs(): Int {
+        var taskId = 0
+        arguments?.getInt(ARGS_TASK_ID)?.let {
+            taskId = it
+        }
+        Log.d(TAG, "requestArgs : $taskId")
+        return taskId
     }
 
     private fun getTask() {
@@ -53,7 +76,9 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
         val taskId = requestArgs()
         context?.runOnUiThread {
             taskDetailsViewModel.getTaskById(taskId).observe(lifecycleOwner, Observer<Task> {
-                Log.d(TAG, "requestArgs : $taskId")
+                if (it == null) {
+                    return@Observer
+                }
                 Log.d(TAG, "Task : $task")
                 setView(it)
             })
@@ -69,5 +94,12 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
         } ?: run {
             Toast.makeText(requireContext(), "Error!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun toEditTask(taskId: Int) {
+        Log.d(TAG, "toEditTask, Task Id : $taskId")
+        val bundle = Bundle()
+        bundle.putInt(ARGS_TASK_ID, taskId)
+        view?.findNavController()?.navigate(R.id.edit_task, bundle)
     }
 }
