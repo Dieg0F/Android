@@ -10,18 +10,16 @@ import kotlin.concurrent.thread
 
 class CreateTaskViewModel : ViewModel(), KoinComponent {
 
+
     private val roomRepository: RoomRepository by inject()
 
-    fun insert(task: Task) {
+    fun insert(task: Task, callback: ((success: Boolean) -> Unit)) {
         thread {
-            if (roomRepository.insertTask(task) != null) {
-                Log.d("CreateTaskViewModel", "Task Created!")
-                // Return success!!
-            } else {
-                Log.e("CreateTaskViewModel", "Task Not Created!")
-                // Return fail!!
+            roomRepository.insertTask(task).let { id ->
+                callback(true)
+            } ?: run {
+                callback(false)
             }
         }
     }
-
 }
