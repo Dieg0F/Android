@@ -3,9 +3,30 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimaryDark">@color/primary_background_color</item>
+        <item name="colorPrimary">@color/primary_background_color</item>
+        <item name="colorAccent">@color/primary_background_color</item>
+        <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
+        <item name="android:buttonStyle">@style/CustomButtonStyle</item>
+        <item name="android:toolbarStyle">@style/CustomToolbarStyle</item>
+    </style>
+
+    <style name="bottom_navigation_style">
+        <item name="itemIconTint">@drawable/bottom_navigation_bar_button</item>
+        <item name="itemTextColor">@drawable/bottom_navigation_bar_button</item>
+        <item name="android:backgroundTint">@color/primary_background_color</item>
+    </style>
+
+    <style name="CustomTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="CustomToolbarStyle" parent="android:Widget.Toolbar">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
 </resources>

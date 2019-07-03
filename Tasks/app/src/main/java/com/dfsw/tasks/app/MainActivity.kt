@@ -2,6 +2,7 @@ package com.dfsw.tasks.app
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.View
 import androidx.navigation.NavController
@@ -51,28 +52,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun setToolbarConfig(navController: NavController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            window.statusBarColor =
+                ContextCompat.getColor(this, R.color.status_bar_color)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             when(destination.id) {
-                R.id.to_do_list -> {
+                R.id.to_do_list, R.id.done_list -> {
                     toolbar.navigationIcon = null
-                    toolbar.title = "Tasks To Do"
-                    navigation.visibility = View.VISIBLE
-                    floatingActionButton.show()
-                }
-                R.id.done_list -> {
-                    toolbar.navigationIcon = null
-                    toolbar.title = "Done Tasks"
+                    toolbar.title = "My tasks"
                     navigation.visibility = View.VISIBLE
                     floatingActionButton.show()
                 }
                 R.id.create_task -> {
-                    toolbar.title = "Create Task"
+                    toolbar.title = "Create task"
                     navigation.visibility = View.GONE
                     floatingActionButton.hide()
                 }
                 R.id.tasks_details -> {
-                    toolbar.title = "Task Details"
+                    toolbar.title = "Task information"
                     navigation.visibility = View.GONE
                     floatingActionButton.hide()
+                }
+                R.id.edit_task -> {
+                    toolbar.title = "Edit task"
                 }
             }
         }

@@ -6,7 +6,7 @@ import com.dfsw.tasks.data.dao.TaskDao
 import com.dfsw.tasks.data.model.Task
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
         Task::class
     ]
@@ -15,19 +15,4 @@ abstract class AppDataBase : RoomDatabase() {
 
     // Abstract function for TaskDao.
     abstract fun taskDao(): TaskDao
-
-//    companion object {
-//        @Volatile private var INSTANCE: AppDataBase? = null
-//
-//        fun getInstance(context: Context): AppDataBase {
-//            return INSTANCE ?: synchronized(this) {
-//                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-//            }
-//        }
-//
-//        private fun buildDatabase(context: Context): AppDataBase =
-//            Room.databaseBuilder(
-//                context.applicationContext, AppDataBase::class.java, "app-database"
-//            ).build()
-//    }
 }

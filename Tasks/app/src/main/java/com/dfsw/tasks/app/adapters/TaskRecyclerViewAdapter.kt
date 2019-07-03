@@ -28,7 +28,7 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(task: Task, clickListener: (Int) -> Unit) {
         itemView.task_title.text = task.title
-        itemView.task_information.text = task.information
+        itemView.task_information.text = task.description
         itemView.task_status_title.text = task.status
         itemView.content_task_item.setOnClickListener { clickListener(task.id) }
     }

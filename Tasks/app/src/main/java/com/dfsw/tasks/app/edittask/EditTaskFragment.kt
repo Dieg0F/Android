@@ -67,12 +67,12 @@ class EditTaskFragment : Fragment(), KoinComponent  {
         Log.d(TAG, "setView")
 
         et_task_title.setText(task.title)
-        et_task_information.setText(task.information)
+        et_task_information.setText(task.description)
 
         floatingActionButton.setOnClickListener {
 
             task.title = et_task_title.text.toString()
-            task.information = et_task_information.text.toString()
+            task.description = et_task_information.text.toString()
             task.status = "UPDATED"
 
             editTaskViewModel.update(task) { success ->

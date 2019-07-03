@@ -50,7 +50,7 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
 
             val task = Task()
             task.title = et_task_title.text.toString()
-            task.information = et_task_information.text.toString()
+            task.description = et_task_information.text.toString()
             task.status = "NEW"
 
             createTaskViewModel.insert(task) { success ->

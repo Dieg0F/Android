@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
 import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
@@ -16,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_task_details.*
 import org.jetbrains.anko.runOnUiThread
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import kotlin.concurrent.thread
 
 class TaskDetailsFragment : Fragment(), KoinComponent {
 
@@ -90,7 +88,7 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
         task?.let { it ->
             this.task = it
             tv_task_title.text = it.title
-            tv_task_information.text = it.information
+            tv_task_information.text = it.description
         } ?: run {
             Toast.makeText(requireContext(), "Error!", Toast.LENGTH_SHORT).show()
         }

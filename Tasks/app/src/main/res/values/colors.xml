@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FFC107</color>
-    <color name="primary_dark">#FFA000</color>
-    <color name="primary_light">#FFECB3</color>
-    <color name="accent">#4CAF50</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="icons">#212121</color>
-    <color name="divider">#BDBDBD</color>
-    <color name="toolbar_text">#FFFFFF</color>
+    <color name="primary_accent">#BA68C8</color>
+    <color name="warning_accent">#E57373</color>
+    <color name="info_accent">#4DD0E1</color>
+    <color name="status_bar_color">#FFFFFF</color>
+    <color name="primary_background_color">#FFFFFF</color>
+    <color name="toolbar_text_color">#767676</color>
+    <color name="bottom_text_color">#9E9E9E</color>
 </resources>
