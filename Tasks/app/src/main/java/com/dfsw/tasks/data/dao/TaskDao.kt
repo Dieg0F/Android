@@ -16,12 +16,12 @@ interface TaskDao {
     @Delete
     fun delete(task: Task)
 
-    @Query("SELECT * FROM task")
+    @Query (value = "SELECT * FROM task")
     fun getAllTasks() : LiveData<MutableList<Task>>
 
-    @Query("SELECT * FROM task WHERE isCompleted == :isCompleted")
+    @Query (value = "SELECT * FROM task WHERE isCompleted == :isCompleted")
     fun getTaskByCompleted(isCompleted: Boolean) : LiveData<MutableList<Task>>
 
-    @Query (value = "SELECT * FROM task WHERE id == :taskId")
+    @Query (value = "SELECT * FROM task WHERE id like :taskId" )
     fun getTask(taskId: Int) : LiveData<Task>
 }

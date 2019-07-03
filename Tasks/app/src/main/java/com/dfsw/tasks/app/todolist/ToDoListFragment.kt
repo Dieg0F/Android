@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.dfsw.tasks.R
 import com.dfsw.tasks.app.adapters.TaskRecyclerViewAdapter
+import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
 import com.dfsw.tasks.common.Logger
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_to_do_list.*
@@ -65,6 +67,17 @@ class ToDoListFragment : Fragment(), KoinComponent {
     private fun setRecyclerView() {
         Log.d(TAG, "setRecyclerView")
         task_recycler_view.layoutManager = LinearLayoutManager(requireContext())
-        task_recycler_view.adapter = TaskRecyclerViewAdapter(taskList)
+        task_recycler_view.adapter = TaskRecyclerViewAdapter(taskList) {
+            toTaskDetails(it)
+        }
+    }
+
+    private fun toTaskDetails(taskId: Int) {
+        Log.d(TAG, "toTaskDetails, Task Id : $taskId")
+        val bundle = Bundle()
+        bundle.putString(ARGS_TASK_ID, taskId.toString())
+        Navigation
+            .findNavController(requireActivity(), R.id.my_nav_host_fragment)
+            .navigate(R.id.tasks_details, bundle)
     }
 }

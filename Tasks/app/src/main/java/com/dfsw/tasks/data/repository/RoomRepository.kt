@@ -16,4 +16,6 @@ class RoomRepository : KoinComponent {
     fun deleteTask(task: Task) = appDataBase.taskDao().delete(task)
 
     fun getAllTasks() = appDataBase.taskDao().getAllTasks()
+
+    fun getTask(taskId: Int) = appDataBase.taskDao().getTask(taskId)
 }

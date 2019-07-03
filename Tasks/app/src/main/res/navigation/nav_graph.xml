@@ -18,8 +18,8 @@
         <action android:id="@+id/action_doneList_to_editTask" app:destination="@id/edit_task"/>
     </fragment>
 
-    <fragment android:id="@+id/tasks_details" android:name="com.dfsw.tasks.app.tasksdetails.TasksDetails"
-              android:label="fragment_tasks_details" tools:layout="@layout/fragment_tasks_details"/>
+    <fragment android:id="@+id/tasks_details" android:name="com.dfsw.tasks.app.taskdetails.TaskDetailsFragment"
+              android:label="fragment_tasks_details" tools:layout="@layout/fragment_task_details"/>
 
     <fragment android:id="@+id/create_task" android:name="com.dfsw.tasks.app.createtask.CreateTaskFragment"
               android:label="fragment_create_task"
