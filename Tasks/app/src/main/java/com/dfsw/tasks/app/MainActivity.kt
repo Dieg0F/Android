@@ -40,11 +40,6 @@ class MainActivity : AppCompatActivity() {
         return Navigation.findNavController(this, R.id.my_nav_host_fragment).navigateUp()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.task_details_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         menu?.close()
         return super.onPrepareOptionsMenu(menu)

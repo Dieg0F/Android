@@ -11,12 +11,6 @@
         <item name="android:toolbarStyle">@style/CustomToolbarStyle</item>
     </style>
 
-    <style name="bottom_navigation_style">
-        <item name="itemIconTint">@drawable/bottom_navigation_bar_button</item>
-        <item name="itemTextColor">@drawable/bottom_navigation_bar_button</item>
-        <item name="android:backgroundTint">@color/primary_background_color</item>
-    </style>
-
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
@@ -27,6 +21,27 @@
 
     <style name="CustomButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="bottom_navigation_style">
+        <item name="itemIconTint">@drawable/bottom_navigation_bar_button</item>
+        <item name="itemTextColor">@drawable/bottom_navigation_bar_button</item>
+        <item name="android:backgroundTint">@color/primary_background_color</item>
+    </style>
+
+    <style name="task_title_style">
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">0.4dp</item>
+    </style>
+
+    <style name="task_information_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">0.4dp</item>
+    </style>
+
+    <style name="task_status_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">0.4dp</item>
     </style>
 
 </resources>
