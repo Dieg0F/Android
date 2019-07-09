@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".app.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary_background_color"
+                android:background="@color/primary_background_color"
+                app:titleTextColor="@color/toolbar_text_color"
+                app:collapseIcon="@drawable/navigation_back_icon"
+                app:popupTheme="?actionBarPopupTheme">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <fragment
+            android:id="@+id/my_nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/toolbar_content"
+            app:defaultNavHost="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_content"
+            app:navGraph="@navigation/nav_graph"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:src="@drawable/add_item_icon"
+            android:background="@color/primary_accent"
+            android:backgroundTint="@color/primary_accent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/actionBottom"
+            app:fabSize="normal"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/my_nav_host_fragment"
+            app:layout_constraintStart_toStartOf="@+id/my_nav_host_fragment"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/sessionsFragment">
+
+    <fragment android:id="@+id/sessionsFragment" android:name="com.dfsw.tagmaker.app.sessions.SessionsFragment"
+              android:label="fragment_sessions" tools:layout="@layout/fragment_sessions">
+        <action android:id="@+id/action_sessionsFragment_to_createSessionFragment"
+                app:destination="@id/createSessionFragment"/>
+        <action android:id="@+id/action_sessionsFragment_to_sessionDetailFragment"
+                app:destination="@id/sessionDetailFragment"/>
+    </fragment>
+    <fragment android:id="@+id/createSessionFragment" android:name="com.dfsw.tagmaker.app.createsession.CreateSessionFragment"
+              android:label="fragment_create_session" tools:layout="@layout/fragment_create_session"/>
+    <fragment android:id="@+id/sessionDetailFragment" android:name="com.dfsw.tagmaker.app.sessiondetail.SessionDetailFragment"
+              android:label="fragment_session_detail" tools:layout="@layout/fragment_session_detail">
+        <action android:id="@+id/action_sessionDetailFragment_to_createTagFragment"
+                app:destination="@id/createTagFragment"/>
+    </fragment>
+    <fragment android:id="@+id/createTagFragment" android:name="com.dfsw.tagmaker.app.createtag.CreateTagFragment"
+              android:label="fragment_create_tag" tools:layout="@layout/fragment_create_tag"/>
+</navigation>
