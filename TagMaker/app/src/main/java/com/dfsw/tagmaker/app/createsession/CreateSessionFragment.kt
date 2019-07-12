@@ -48,12 +48,13 @@ class CreateSessionFragment : Fragment(), KoinComponent  {
         Log.d(TAG, "setView")
         floatingActionButton.setOnClickListener {
 
-            val task = Session()
-            task.title = et_session_title.text.toString()
-            task.description = et_session_information.text.toString()
-            task.status = "NEW"
+            val session = Session()
+            session.title = et_session_title.text.toString()
+            session.description = et_session_information.text.toString()
+            session.tags = et_session_tags.text.toString()
+            session.status = "NEW"
 
-            createSessionViewModel.insert(task) { success ->
+            createSessionViewModel.insert(session) { success ->
                 context?.runOnUiThread {
                     val message = if (success) {
                         view?.findNavController()?.navigateUp()

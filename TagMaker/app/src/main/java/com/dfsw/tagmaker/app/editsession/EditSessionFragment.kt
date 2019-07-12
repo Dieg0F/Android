@@ -68,11 +68,13 @@ class EditSessionFragment : Fragment(), KoinComponent  {
 
         et_session_title.setText(session.title)
         et_session_information.setText(session.description)
+        et_session_tags.setText(session.tags)
 
         floatingActionButton.setOnClickListener {
 
             session.title = et_session_title.text.toString()
             session.description = et_session_information.text.toString()
+            session.tags = et_session_tags.text.toString()
             session.status = "UPDATED"
 
             editSessionViewModel.update(session) { success ->

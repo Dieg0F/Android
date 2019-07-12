@@ -28,4 +28,6 @@
 
     <!-- Tags Fields -->
     <string name="tags_title_label">Tags</string>
+    <string name="session_added_tags_label">Added Tags</string>
+    <string name="session_add_tags_text">Add Tegs</string>
 </resources>

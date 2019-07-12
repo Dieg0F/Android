@@ -3,14 +3,18 @@ package com.dfsw.tagmaker.app.sessiondetails
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tagmaker.R
+import com.dfsw.tagmaker.app.adapters.TagRecyclerViewAdapter
 import com.dfsw.tagmaker.common.Constants.ARGS_SESSION_ID
 import com.dfsw.tagmaker.common.Logger
 import com.dfsw.tagmaker.data.model.Session
+import com.dfsw.tagmaker.data.model.Tag
 import kotlinx.android.synthetic.main.fragment_session_details.*
 import org.jetbrains.anko.runOnUiThread
 import org.koin.standalone.KoinComponent
@@ -35,11 +39,11 @@ class SessionDetailsFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        getTask()
+        getSession()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.task_details_menu, menu)
+        inflater?.inflate(R.menu.session_details_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -53,7 +57,6 @@ class SessionDetailsFragment : Fragment(), KoinComponent {
                 }
                 R.id.remove_task_option -> {
                     Log.d(TAG, "onOptionsItemSelected : remove_task_option")
-
                     sessionDetailsViewModel.deleteSession(task) {
                         Log.d(TAG, "onOptionsItemSelected : session removed")
                         view?.findNavController()?.popBackStack()
@@ -65,20 +68,20 @@ class SessionDetailsFragment : Fragment(), KoinComponent {
     }
 
     private fun requestArgs(): Int {
-        var taskId = 0
+        var sessionId = 0
         arguments?.getInt(ARGS_SESSION_ID)?.let {
-            taskId = it
+            sessionId = it
         }
-        Log.d(TAG, "requestArgs : $taskId")
-        return taskId
+        Log.d(TAG, "requestArgs : $sessionId")
+        return sessionId
     }
 
-    private fun getTask() {
+    private fun getSession() {
         Log.d(TAG, "getSession")
         val lifecycleOwner = this
-        val taskId = requestArgs()
+        val sessionId = requestArgs()
         context?.runOnUiThread {
-            sessionDetailsViewModel.getSession(taskId).observe(lifecycleOwner, Observer<Session> {
+            sessionDetailsViewModel.getSession(sessionId).observe(lifecycleOwner, Observer<Session> {
                 if (it == null) {
                     return@Observer
                 }
@@ -94,9 +97,24 @@ class SessionDetailsFragment : Fragment(), KoinComponent {
             this.session = it
             tv_session_title.text = it.title
             tv_session_information.text = it.description
+
+            setRecyclerView(it.tags)
         } ?: run {
             Toast.makeText(requireContext(), "Error!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setRecyclerView(tags: String) {
+        Log.d(TAG, "setRecyclerView")
+
+        val tagList: MutableList<Tag> = mutableListOf()
+        tags.split("#").forEach {
+            tagList.add(Tag(name = "#$it"))
+        }
+        tagList.removeAt(0)
+
+        tags_recycler_view.layoutManager = LinearLayoutManager(requireContext())
+        tags_recycler_view.adapter = TagRecyclerViewAdapter(tagList)
     }
 
     private fun toEditTask(taskId: Int) {

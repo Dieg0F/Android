@@ -6,7 +6,7 @@ import com.dfsw.tagmaker.data.dao.SessionDao
 import com.dfsw.tagmaker.data.model.Session
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         Session::class
     ]

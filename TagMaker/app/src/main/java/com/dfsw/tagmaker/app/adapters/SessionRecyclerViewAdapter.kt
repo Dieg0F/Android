@@ -10,26 +10,24 @@ import kotlinx.android.synthetic.main.row_item_session.view.*
 
 class TaskRecyclerViewAdapter(
     private var sessionList: MutableList<Session>,
-    private val clickListener: (Int) -> Unit)  : RecyclerView.Adapter<TaskViewHolder>() {
+    private val clickListener: (Int) -> Unit)  : RecyclerView.Adapter<SessionViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): TaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SessionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return TaskViewHolder(inflater.inflate(R.layout.row_item_session, parent, false))
+        return SessionViewHolder(inflater.inflate(R.layout.row_item_session, parent, false))
     }
 
-    override fun onBindViewHolder(taskViewHolder: TaskViewHolder, position: Int) {
+    override fun onBindViewHolder(taskViewHolder: SessionViewHolder, position: Int) {
         taskViewHolder.bind(sessionList[position], clickListener)
     }
 
     override fun getItemCount() = sessionList.size
 }
 
-class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(session: Session, clickListener: (Int) -> Unit) {
         itemView.tv_session_title.text = session.title
-        itemView.tv_session_information.text = session.description
-        itemView.task_status_title.text = session.status
         itemView.content_task_item.setOnClickListener { clickListener(session.id) }
     }
 }

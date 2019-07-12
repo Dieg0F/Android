@@ -3,9 +3,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/content_task_item"
+        android:background="@drawable/session_custom_background"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
@@ -22,49 +25,14 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/session_title_style"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
-                android:gravity="start"/>
-
-        <TextView
-                android:id="@+id/tv_session_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_session_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                style="@style/session_information_style"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="16dp"
-                android:gravity="start"/>
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-            android:id="@+id/task_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/session_description"
-            app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-                android:id="@+id/task_status_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                style="@style/task_status_style"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical|center_horizontal"/>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -3,12 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimaryDark">@color/primary_background_color</item>
-        <item name="colorPrimary">@color/primary_background_color</item>
-        <item name="colorAccent">@color/primary_background_color</item>
+        <item name="colorPrimaryDark">@color/main_background</item>
+        <item name="colorPrimary">@color/main_background</item>
+        <item name="colorAccent">@color/main_background</item>
         <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
         <item name="android:buttonStyle">@style/CustomButtonStyle</item>
         <item name="android:toolbarStyle">@style/CustomToolbarStyle</item>
+        <item name="android:editTextStyle">@style/CustomEditTextStyle</item>
+    </style>
+
+    <style name="CustomEditTextStyle" parent="android:Widget.DeviceDefault.Light.EditText">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:background">@drawable/edit_text_custom_background</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_custom_cursor</item>
     </style>
 
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">
@@ -26,11 +33,11 @@
     <style name="bottom_navigation_style">
         <item name="itemIconTint">@drawable/bottom_navigation_bar_button</item>
         <item name="itemTextColor">@drawable/bottom_navigation_bar_button</item>
-        <item name="android:backgroundTint">@color/primary_background_color</item>
+        <item name="android:backgroundTint">@color/main_background</item>
     </style>
 
     <style name="session_title_style">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">0.4dp</item>
     </style>
 
@@ -40,7 +47,7 @@
     </style>
 
     <style name="task_status_style">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">0.4dp</item>
     </style>
 

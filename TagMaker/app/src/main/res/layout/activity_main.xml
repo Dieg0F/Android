@@ -3,8 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/primary_background_color"
-        android:backgroundTint="@color/primary_background_color"
+        android:background="@color/main_background"
+        android:backgroundTint="@color/main_background"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,8 +23,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/primary_background_color"
-                android:background="@color/primary_background_color"
+                android:backgroundTint="@color/main_background"
+                android:background="@color/main_background"
                 app:titleTextColor="@color/toolbar_text_color"
                 app:collapseIcon="@drawable/navigation_back_icon"
                 app:popupTheme="?actionBarPopupTheme" />
@@ -60,8 +60,8 @@
 
     <android.support.design.widget.FloatingActionButton
             android:src="@drawable/add_float_action_button_icon"
-            android:background="@color/primary_accent"
-            android:backgroundTint="@color/primary_accent"
+            android:background="@color/info_accent"
+            android:backgroundTint="@color/info_accent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
