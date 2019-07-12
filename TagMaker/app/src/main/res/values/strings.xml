@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Tag Maker</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- BottomNavigation Menu item -->
+    <string name="to_do_list_bottom_menu_icon_text">To Do</string>
+    <string name="done_list_bottom_menu_icon_text">Done</string>
+
+
+    <!-- Fragments Titles -->
+    <string name="main_page_toolbar_title">Tag Maker</string>
+    <string name="favorite_tags_page_toolbar_title">Favorite Tags</string>
+    <string name="session_page_toolbar_title">Session</string>
+    <string name="session_create_toolbar_title">Create Session</string>
+    <string name="session_edit_toolbar_title">Edit Session</string>
+    <string name="add_tags_toolbar_title">Add Tags</string>
+
+    <!-- Options Menu -->
+    <string name="edit_session_option">Edit Session</string>
+    <string name="remove_session_option">Remove Session</string>
+
+    <!-- Sessions Fields -->
+    <string name="session_title_label">Title</string>
+    <string name="session_description_label">Description</string>
+    <string name="session_tags_label">Tags</string>
+
+    <!-- Tags Fields -->
+    <string name="tags_title_label">Tags</string>
+    <string name="session_added_tags_label">Added Tags</string>
+    <string name="session_add_tags_text">Add Tegs</string>
+</resources>

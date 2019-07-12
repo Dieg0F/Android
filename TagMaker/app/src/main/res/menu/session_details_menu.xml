@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/edit_task_option"
+          android:title="@string/edit_session_option"
+          app:showAsAction="never"/>
+    <item android:id="@+id/remove_task_option"
+          android:title="@string/remove_session_option"
+          app:showAsAction="never"/>
+</menu>
