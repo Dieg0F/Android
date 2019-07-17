@@ -9,5 +9,8 @@ data class Task(
     var title: String = "",
     var description: String = "",
     var status: String = "",
+    var notificationsEnabled: Boolean = false,
+    var notificationsRepeatable: Boolean = false,
+    var notificationFrequency: Long = 0L,
     var isCompleted: Boolean = false
 )

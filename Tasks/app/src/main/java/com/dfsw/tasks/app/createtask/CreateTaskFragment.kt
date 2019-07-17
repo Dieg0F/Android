@@ -46,9 +46,10 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
 
     private fun setView() {
         Log.d(TAG, "setView")
+        val task = Task()
+
         floatingActionButton.setOnClickListener {
 
-            val task = Task()
             task.title = et_task_title.text.toString()
             task.description = et_task_information.text.toString()
             task.status = "NEW"
@@ -64,6 +65,17 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
 
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+
+        sw_notifications.setOnClickListener {
+            if (notification_panel.visibility == View.GONE) {
+                notification_panel.visibility = View.VISIBLE
+                task.notificationsEnabled = true
+                task.notificationsRepeatable = sw_notification_repeat.isEnabled
+                task.notificationFrequency = 15000L
+            } else {
+                notification_panel.visibility = View.GONE
             }
         }
     }
