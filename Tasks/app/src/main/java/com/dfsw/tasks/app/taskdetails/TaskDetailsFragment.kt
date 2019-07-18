@@ -1,15 +1,19 @@
 package com.dfsw.tasks.app.taskdetails
 
+import android.app.PendingIntent
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
+import com.dfsw.tasks.app.MainActivity
+import com.dfsw.tasks.common.*
 import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
-import com.dfsw.tasks.common.Logger
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_task_details.*
 import org.jetbrains.anko.runOnUiThread
@@ -94,6 +98,7 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
             this.task = it
             tv_task_title.text = it.title
             tv_task_information.text = it.description
+
         } ?: run {
             Toast.makeText(requireContext(), "Error!", Toast.LENGTH_SHORT).show()
         }
@@ -104,5 +109,11 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
         val bundle = Bundle()
         bundle.putInt(ARGS_TASK_ID, taskId)
         view?.findNavController()?.navigate(R.id.edit_task, bundle)
+    }
+
+    private fun getNotificationIntent(): PendingIntent {
+        val notificationIntent = Intent(context, TaskHelper::class.java)
+        notificationIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        return PendingIntent.getActivity(context, 0, notificationIntent, 0)
     }
 }

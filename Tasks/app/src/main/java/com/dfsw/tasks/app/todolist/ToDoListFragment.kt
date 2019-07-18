@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
 import com.dfsw.tasks.app.adapters.TaskRecyclerViewAdapter
@@ -18,7 +17,6 @@ import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_to_do_list.*
 import org.koin.android.ext.android.inject
 import org.koin.standalone.KoinComponent
-import kotlin.concurrent.thread
 
 class ToDoListFragment : Fragment(), KoinComponent {
 
