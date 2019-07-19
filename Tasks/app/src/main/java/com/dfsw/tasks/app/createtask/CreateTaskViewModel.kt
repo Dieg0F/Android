@@ -1,7 +1,9 @@
 package com.dfsw.tasks.app.createtask
 
 import android.arch.lifecycle.ViewModel
+import android.content.Context
 import android.util.Log
+import com.dfsw.tasks.common.TaskHelper
 import com.dfsw.tasks.data.model.Task
 import com.dfsw.tasks.data.repository.RoomRepository
 import org.koin.standalone.KoinComponent
@@ -20,5 +22,9 @@ class CreateTaskViewModel : ViewModel(), KoinComponent {
                 callback(false)
             }
         }
+    }
+
+    fun enableNotification(task: Task, context: Context) {
+        TaskHelper().taskNotification(task, context)
     }
 }

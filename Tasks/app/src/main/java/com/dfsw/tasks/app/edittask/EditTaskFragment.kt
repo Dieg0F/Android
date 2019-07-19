@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
-import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
+import com.dfsw.tasks.common.Constants.ARGS_TASK_ID
 import com.dfsw.tasks.common.KeyboardHelper
 import com.dfsw.tasks.common.Logger
 import com.dfsw.tasks.data.model.Task
@@ -75,6 +75,13 @@ class EditTaskFragment : Fragment(), KoinComponent  {
             task.description = et_task_information.text.toString()
             task.status = "UPDATED"
 
+            if (task.notificationsEnabled) {
+                task.notificationsRepeatable = sw_notification_repeat.isChecked
+                task.notificationFrequency = getTimeNotification()
+
+                editTaskViewModel.updateNotification(task, requireContext())
+            }
+
             editTaskViewModel.update(task) { success ->
                 context?.runOnUiThread {
                     val message = if (success) {
@@ -89,7 +96,25 @@ class EditTaskFragment : Fragment(), KoinComponent  {
             }
         }
 
+        sw_notifications.setOnClickListener {
+            if (notification_panel.visibility == View.GONE) {
+                notification_panel.visibility = View.VISIBLE
+                task.notificationsEnabled = true
+
+            } else {
+                notification_panel.visibility = View.GONE
+                task.notificationsEnabled = false
+                task.notificationsRepeatable = false
+                task.notificationFrequency = 0L
+            }
+        }
+
     }
+
+    private fun getTimeNotification() : Long {
+        return et_notification_period.text.toString().toLong()
+    }
+
 
     override fun onStop() {
         view?.let {

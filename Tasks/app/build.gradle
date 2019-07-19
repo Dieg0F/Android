@@ -28,6 +28,9 @@ dependencies {
     def lifecycleVersion = '1.1.1'
     def anko_version= '0.10.8'
 
+    def rxAndroidVersion = '2.1.1'
+    def rxJavaVersion = '2.2.7'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -63,4 +66,8 @@ dependencies {
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
+    // Rx dependency
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 }

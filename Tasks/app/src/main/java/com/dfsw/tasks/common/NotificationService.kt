@@ -9,8 +9,8 @@ import android.net.Uri
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.RemoteInput
-import com.dfsw.tasks.common.Containts.NOTIFICATION_CHANNEL_ID
-import com.dfsw.tasks.common.Containts.NOTIFICATION_CHANNEL_NAME
+import com.dfsw.tasks.common.Constants.NOTIFICATION_CHANNEL_ID
+import com.dfsw.tasks.common.Constants.NOTIFICATION_CHANNEL_NAME
 
 class NotificationService {
 

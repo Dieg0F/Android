@@ -13,11 +13,10 @@
             android:id="@+id/tv_task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/task_title_label"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp" android:layout_marginStart="16dp"/>
-
     <EditText
             android:id="@+id/et_task_title"
             android:layout_width="match_parent"
@@ -25,6 +24,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
+            style="@style/CustomEditTextStyle"
             app:layout_constraintTop_toBottomOf="@+id/tv_task_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -33,23 +33,94 @@
             android:id="@+id/tv_task_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Information"
+            android:text="@string/task_description_label"
             android:layout_marginTop="32dp"
             android:layout_marginStart="16dp"
             app:layout_constraintTop_toBottomOf="@+id/et_task_title"
             app:layout_constraintStart_toStartOf="parent"/>
-
     <EditText
             android:id="@+id/et_task_information"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:inputType="text|textMultiLine"
+            android:layout_height="170dp"
+            android:inputType="textMultiLine"
+            android:gravity="start|top"
+            android:ems="10"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            style="@style/CustomEditTextStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_task_information"
             app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+            android:id="@+id/tv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/enable_notifications_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_task_information"/>
+    <Switch
+            android:id="@+id/sw_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:theme="@style/CustomSwitchStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_notification"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_notification"/>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:id="@+id/notification_panel"
+            app:layout_constraintTop_toBottomOf="@+id/tv_notification">
+
+        <TextView
+                android:id="@+id/tv_notification_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notify_at_label"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"/>
+        <EditText
+                android:id="@+id/et_notification_period"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                style="@style/CustomEditTextStyle"
+                app:layout_constraintTop_toBottomOf="@+id/tv_notification_period"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                android:id="@+id/tv_notification_repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:text="@string/repeat_notification_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_notification_period"/>
+        <Switch
+                android:id="@+id/sw_notification_repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:theme="@style/CustomSwitchStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_notification_repeat"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_notification_repeat"/>
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.FloatingActionButton
             android:src="@drawable/create_new_task_done_icon"
@@ -57,12 +128,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/floatingActionButton"
             app:fabSize="normal"
             app:elevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="16dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -5,15 +5,13 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
-import com.dfsw.tasks.app.MainActivity
 import com.dfsw.tasks.common.*
-import com.dfsw.tasks.common.Containts.ARGS_TASK_ID
+import com.dfsw.tasks.common.Constants.ARGS_TASK_ID
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_task_details.*
 import org.jetbrains.anko.runOnUiThread
@@ -86,7 +84,6 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
                 if (it == null) {
                     return@Observer
                 }
-                Log.d(TAG, "Task : $task")
                 setView(it)
             })
         }
@@ -98,6 +95,8 @@ class TaskDetailsFragment : Fragment(), KoinComponent {
             this.task = it
             tv_task_title.text = it.title
             tv_task_information.text = it.description
+
+            Log.d(TAG, "Task : $task")
 
         } ?: run {
             Toast.makeText(requireContext(), "Error!", Toast.LENGTH_SHORT).show()

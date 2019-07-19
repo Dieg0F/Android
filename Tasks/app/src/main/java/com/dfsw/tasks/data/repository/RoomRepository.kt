@@ -17,5 +17,7 @@ class RoomRepository : KoinComponent {
 
     fun getAllTasks() = appDataBase.taskDao().getAllTasks()
 
+    fun getTasksToNotify() = appDataBase.taskDao().getTasksToNotify()
+
     fun getTask(taskId: Int) = appDataBase.taskDao().getTask(taskId)
 }

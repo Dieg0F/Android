@@ -12,7 +12,7 @@ object KeyboardHelper {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE)
                     as InputMethodManager
 
-            imm.hideSoftInputFromWindow(view.windowToken, 0);
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

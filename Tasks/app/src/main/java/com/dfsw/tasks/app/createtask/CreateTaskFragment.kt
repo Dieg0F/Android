@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
@@ -54,6 +55,13 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
             task.description = et_task_information.text.toString()
             task.status = "NEW"
 
+            if (task.notificationsEnabled) {
+                task.notificationsRepeatable = sw_notification_repeat.isChecked
+                task.notificationFrequency = getTimeNotification()
+
+                createTaskViewModel.enableNotification(task, requireContext())
+            }
+
             createTaskViewModel.insert(task) { success ->
                 context?.runOnUiThread {
                     val message = if (success) {
@@ -72,12 +80,18 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
             if (notification_panel.visibility == View.GONE) {
                 notification_panel.visibility = View.VISIBLE
                 task.notificationsEnabled = true
-                task.notificationsRepeatable = sw_notification_repeat.isEnabled
-                task.notificationFrequency = 15000L
+
             } else {
                 notification_panel.visibility = View.GONE
+                task.notificationsEnabled = false
+                task.notificationsRepeatable = false
+                task.notificationFrequency = 0L
             }
         }
+    }
+
+    private fun getTimeNotification() : Long {
+        return et_notification_period.text.toString().toLong()
     }
 
     override fun onStop() {

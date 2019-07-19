@@ -1,14 +1,19 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/primary_background_color</item>
         <item name="colorPrimary">@color/primary_background_color</item>
         <item name="colorAccent">@color/primary_background_color</item>
         <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
         <item name="android:buttonStyle">@style/CustomButtonStyle</item>
         <item name="android:toolbarStyle">@style/CustomToolbarStyle</item>
+        <item name="android:editTextStyle">@style/CustomEditTextStyle</item>
+    </style>
+
+    <style name="CustomEditTextStyle" parent="android:Widget.DeviceDefault.Light.EditText">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:background">@drawable/edit_text_custom_background</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_custom_cursor</item>
     </style>
 
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">
@@ -21,6 +26,10 @@
 
     <style name="CustomButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+    
+    <style name="CustomSwitchStyle">
+        <item name="colorControlActivated">@color/primary_accent</item>
     </style>
 
     <style name="bottom_navigation_style">

@@ -19,6 +19,9 @@ interface TaskDao {
     @Query (value = "SELECT * FROM task")
     fun getAllTasks() : LiveData<MutableList<Task>>
 
+    @Query (value = "SELECT * FROM task WHERE notificationsEnabled == 1")
+    fun getTasksToNotify() : MutableList<Task>
+
     @Query (value = "SELECT * FROM task WHERE isCompleted == :isCompleted")
     fun getTaskByCompleted(isCompleted: Boolean) : LiveData<MutableList<Task>>
 
