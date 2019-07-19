@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             window.statusBarColor =
                 ContextCompat.getColor(this, R.color.status_bar_color)
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             when(destination.id) {
                 R.id.to_do_list, R.id.done_list -> {
                     toolbar.navigationIcon = null
