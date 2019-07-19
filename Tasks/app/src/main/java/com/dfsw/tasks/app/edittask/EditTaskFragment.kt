@@ -69,6 +69,10 @@ class EditTaskFragment : Fragment(), KoinComponent  {
         et_task_title.setText(task.title)
         et_task_information.setText(task.description)
 
+        sw_notifications.isChecked = task.notificationsEnabled
+        sw_notification_repeat.isChecked = task.notificationsRepeatable
+        et_notification_period.setText(task.notificationFrequency.toString())
+
         floatingActionButton.setOnClickListener {
 
             task.title = et_task_title.text.toString()
@@ -96,11 +100,15 @@ class EditTaskFragment : Fragment(), KoinComponent  {
             }
         }
 
+        notificationSwitchController(task)
+        notificationSwitchAction(task)
+    }
+
+    private fun notificationSwitchAction(task: Task) {
         sw_notifications.setOnClickListener {
             if (notification_panel.visibility == View.GONE) {
                 notification_panel.visibility = View.VISIBLE
                 task.notificationsEnabled = true
-
             } else {
                 notification_panel.visibility = View.GONE
                 task.notificationsEnabled = false
@@ -108,7 +116,18 @@ class EditTaskFragment : Fragment(), KoinComponent  {
                 task.notificationFrequency = 0L
             }
         }
+    }
 
+    private fun notificationSwitchController(task: Task) {
+        if (task.notificationsEnabled) {
+            notification_panel.visibility = View.VISIBLE
+            task.notificationsEnabled = true
+        } else {
+            notification_panel.visibility = View.GONE
+            task.notificationsEnabled = false
+            task.notificationsRepeatable = false
+            task.notificationFrequency = 0L
+        }
     }
 
     private fun getTimeNotification() : Long {
