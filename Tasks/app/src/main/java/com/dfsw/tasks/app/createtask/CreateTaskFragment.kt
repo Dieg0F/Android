@@ -101,7 +101,7 @@ class CreateTaskFragment : Fragment(), KoinComponent {
     }
 
     private fun getTimeNotification() =
-        Calendar.getInstance().timeInMillis - task.notificationDateInMills
+        task.notificationDateInMills - Calendar.getInstance().timeInMillis
 
     private fun setSpinnerSetup() {
         val array: ArrayList<String> = arrayListOf()
