@@ -21,6 +21,7 @@ class TaskHelper : KoinComponent {
     }
 
     fun startTaskNotificationService(context: Context) {
+        Log.d(TAG, "startTaskNotificationService")
         thread {
             val taskList = roomRepository.getTasksToNotify()
             taskList.forEach {
@@ -52,6 +53,7 @@ class TaskHelper : KoinComponent {
     }
 
     private fun notificationHandler(ctx: Context, task: Task) {
+        Log.d(TAG, "notificationHandler")
         NotificationService().create(
             ctx,
             Constants.NOTIFICATION_CHANNEL_ID,

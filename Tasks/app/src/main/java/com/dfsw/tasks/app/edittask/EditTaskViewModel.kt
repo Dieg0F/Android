@@ -23,7 +23,6 @@ class EditTaskViewModel : ViewModel(), KoinComponent {
         }
     }
 
-
     fun updateNotification(task: Task, context: Context) {
         TaskHelper().taskNotification(task, context)
     }

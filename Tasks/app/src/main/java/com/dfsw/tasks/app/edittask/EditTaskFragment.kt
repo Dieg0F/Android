@@ -15,6 +15,13 @@ import com.dfsw.tasks.common.KeyboardHelper
 import com.dfsw.tasks.common.Logger
 import com.dfsw.tasks.data.model.Task
 import kotlinx.android.synthetic.main.fragment_create_task.*
+import kotlinx.android.synthetic.main.fragment_create_task.et_task_information
+import kotlinx.android.synthetic.main.fragment_create_task.et_task_title
+import kotlinx.android.synthetic.main.fragment_create_task.floatingActionButton
+import kotlinx.android.synthetic.main.fragment_create_task.notification_panel
+import kotlinx.android.synthetic.main.fragment_create_task.sw_notification_repeat
+import kotlinx.android.synthetic.main.fragment_create_task.sw_notifications
+import kotlinx.android.synthetic.main.fragment_edit_task.*
 import org.jetbrains.anko.runOnUiThread
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject

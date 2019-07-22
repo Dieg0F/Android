@@ -6,7 +6,7 @@ import com.dfsw.tasks.data.dao.TaskDao
 import com.dfsw.tasks.data.model.Task
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         Task::class
     ]

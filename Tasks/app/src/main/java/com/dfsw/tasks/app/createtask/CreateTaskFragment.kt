@@ -1,5 +1,7 @@
 package com.dfsw.tasks.app.createtask
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -7,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.dfsw.tasks.R
+import com.dfsw.tasks.app.adapters.NotificationSpinnerAdapter
 import com.dfsw.tasks.common.KeyboardHelper
 import com.dfsw.tasks.common.Logger
 import com.dfsw.tasks.data.model.Task
@@ -17,15 +22,18 @@ import kotlinx.android.synthetic.main.fragment_create_task.*
 import org.jetbrains.anko.runOnUiThread
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class CreateTaskFragment : Fragment(), KoinComponent  {
+class CreateTaskFragment : Fragment(), KoinComponent {
 
     companion object {
         val TAG = Logger.TAG
     }
 
     private val createTaskViewModel: CreateTaskViewModel by inject()
+    private lateinit var task: Task
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(false)
@@ -47,7 +55,7 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
 
     private fun setView() {
         Log.d(TAG, "setView")
-        val task = Task()
+        task = Task()
 
         floatingActionButton.setOnClickListener {
 
@@ -88,10 +96,85 @@ class CreateTaskFragment : Fragment(), KoinComponent  {
                 task.notificationFrequency = 0L
             }
         }
+
+        setSpinnerSetup()
     }
 
-    private fun getTimeNotification() : Long {
-        return et_notification_period.text.toString().toLong()
+    private fun getTimeNotification() =
+        Calendar.getInstance().timeInMillis - task.notificationDateInMills
+
+    private fun setSpinnerSetup() {
+        val array: ArrayList<String> = arrayListOf()
+
+        array.add("Selecione")
+        array.add("Hoje")
+        array.add("Escolher Data")
+
+        sp_notification_period.adapter = NotificationSpinnerAdapter(
+            requireContext(), array, "Selecione"
+        )
+        sp_notification_period.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>, view: View?, position: Int,
+                id: Long
+            ) {
+                when (parent.getItemAtPosition(position)) {
+                    "Hoje" -> {
+                        val calendar = Calendar.getInstance()
+                        val day = calendar.get(Calendar.DAY_OF_MONTH)
+                        val month = calendar.get(Calendar.MONTH)
+                        val year = calendar.get(Calendar.YEAR)
+
+                        openTimePicker(year, month, day)
+                    }
+                    "Escolher Data" -> {
+                        openDatePicker()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun openDatePicker() {
+        val calendar = Calendar.getInstance()
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH)
+        val year = calendar.get(Calendar.YEAR)
+
+        if (Logger.DEBUG) Log.d(TAG, "getStartDate")
+        val datePickerDialog = DatePickerDialog(
+            requireContext(), 0,
+            DatePickerDialog.OnDateSetListener { _, yearSet, monthSet, daySet ->
+                task.notificationDate = "Notify when $daySet/$monthSet/$yearSet at"
+                openTimePicker(yearSet, monthSet, daySet)
+            }, year, month, day
+        )
+
+        datePickerDialog.show()
+    }
+
+    private fun openTimePicker(year: Int, month: Int, dayOfMonth: Int) {
+        val cal = Calendar.getInstance()
+
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+
+            task.notificationDate += " $hour:$minute"
+            tv_notification_at.text = task.notificationDate
+
+            val date = Calendar.getInstance()
+            date.set(year, month, dayOfMonth, hour, minute)
+
+            task.notificationDateInMills = date.timeInMillis
+        }
+
+        TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
     }
 
     override fun onStop() {

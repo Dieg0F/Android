@@ -18,4 +18,8 @@
     <string name="notify_at_label">Notify at</string>
     <string name="repeat_notification_label">Repeat Notification</string>
 
+
+    <!-- Spinner Meta -->
+    <string name="meta_position">meta_position</string>
+    <string name="meta_title">meta_title</string>
 </resources>

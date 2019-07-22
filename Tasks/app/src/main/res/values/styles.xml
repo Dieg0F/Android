@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimaryDark">@color/base_background</item>
         <item name="colorPrimary">@color/base_background</item>
         <item name="colorAccent">@color/base_background</item>
@@ -9,23 +9,31 @@
         <item name="android:buttonStyle">@style/CustomButtonStyle</item>
         <item name="android:toolbarStyle">@style/CustomToolbarStyle</item>
         <item name="android:editTextStyle">@style/CustomEditTextStyle</item>
+        <item name="android:popupMenuStyle">@style/CustomPopupMenuStyle</item>
+    </style>
+
+    <!-- The beef: background color for Action Bar overflow menu -->
+    <style name="CustomPopupMenuStyle" parent="android:Widget.PopupMenu">
+        <!--<item name="android:popupBackground">@drawable/popup_custom_background</item>-->
+        <item name="android:popupBackground">@color/base_background</item>
+        <item name="android:background">@color/base_background</item>
+        <item name="android:backgroundTint">@color/base_background</item>
     </style>
 
     <style name="CustomEditTextStyle" parent="android:Widget.DeviceDefault.EditText">
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:background">@drawable/edit_text_custom_background</item>
         <item name="android:textCursorDrawable">@drawable/edit_text_custom_cursor</item>
-        <item name="android:color">@color/text_view_color</item>
+        <item name="android:textColor">@color/text_view_color</item>
     </style>
 
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:color">@color/text_view_color</item>
+        <item name="android:textColor">@color/text_view_color</item>
     </style>
 
     <style name="CustomToolbarStyle" parent="android:Widget.Toolbar">
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:iconTint">@color/toolbar_text_color</item>
         <item name="android:tint">@color/toolbar_text_color</item>
     </style>
 
@@ -33,8 +41,9 @@
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
     
-    <style name="CustomSwitchStyle">
+    <style name="CustomSwitchStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlActivated">@color/primary_accent</item>
+        <item name="colorSwitchThumbNormal">@color/primary_accent</item>
     </style>
 
     <style name="bottom_navigation_style">
@@ -46,19 +55,16 @@
     <style name="task_title_style" parent="CustomTextViewStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">0.4dp</item>
-        <item name="android:color">@color/text_view_color</item>
     </style>
 
     <style name="task_information_style" parent="CustomTextViewStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">0.4dp</item>
-        <item name="android:color">@color/text_view_color</item>
     </style>
 
     <style name="task_status_style" parent="CustomTextViewStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">0.4dp</item>
-        <item name="android:color">@color/text_view_color</item>
     </style>
 
 </resources>

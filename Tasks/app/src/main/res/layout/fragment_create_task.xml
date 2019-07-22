@@ -93,7 +93,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:visibility="gone"
                     android:id="@+id/notification_panel"
                     app:layout_constraintTop_toBottomOf="@+id/tv_notification">
 
@@ -104,29 +103,41 @@
                         android:text="@string/notify_at_label"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="32dp"
                         android:layout_marginStart="24dp"/>
-                <EditText
-                        android:id="@+id/et_notification_period"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="24dp"
+
+                <Spinner
+                        android:id="@+id/sp_notification_period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:dropDownWidth="wrap_content"
+                        android:overlapAnchor="false"
+                        android:spinnerMode="dropdown"
                         android:layout_marginEnd="24dp"
+                        android:gravity="end"
+                        android:padding="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_notification_period"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_notification_period"/>
+
+                <TextView
+                        android:id="@+id/tv_notification_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
-                        style="@style/CustomEditTextStyle"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_notification_period"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_notification_period"/>
 
                 <TextView
                         android:id="@+id/tv_notification_repeat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_marginStart="24dp"
+                        android:layout_marginTop="32dp"
                         android:text="@string/repeat_notification_label"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/et_notification_period"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_notification_at"/>
                 <Switch
                         android:id="@+id/sw_notification_repeat"
                         android:layout_width="wrap_content"
