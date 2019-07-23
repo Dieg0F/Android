@@ -39,7 +39,7 @@ class TaskHelper : KoinComponent {
     private fun notify(task: Task) {
         roomRepository.getTask(task.id).observeForever {
             it?.let { task ->
-                Log.d(TAG, "Task: $task")
+                Log.d(TAG, "Task Name: ${task.title} ${task.notificationFrequency}")
                 val taskUpdated = task
                 if (taskUpdated.notificationsEnabled) {
                     context?.let { ctx ->

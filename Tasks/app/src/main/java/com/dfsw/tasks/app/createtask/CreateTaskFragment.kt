@@ -106,12 +106,12 @@ class CreateTaskFragment : Fragment(), KoinComponent {
     private fun setSpinnerSetup() {
         val array: ArrayList<String> = arrayListOf()
 
-        array.add("Selecione")
-        array.add("Hoje")
-        array.add("Escolher Data")
+        array.add("Select")
+        array.add("Today")
+        array.add("Custom date")
 
         sp_notification_period.adapter = NotificationSpinnerAdapter(
-            requireContext(), array, "Selecione"
+            requireContext(), array, "Select"
         )
         sp_notification_period.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
@@ -124,7 +124,7 @@ class CreateTaskFragment : Fragment(), KoinComponent {
                 id: Long
             ) {
                 when (parent.getItemAtPosition(position)) {
-                    "Hoje" -> {
+                    "Today" -> {
                         val calendar = Calendar.getInstance()
                         val day = calendar.get(Calendar.DAY_OF_MONTH)
                         val month = calendar.get(Calendar.MONTH)
@@ -132,7 +132,10 @@ class CreateTaskFragment : Fragment(), KoinComponent {
 
                         openTimePicker(year, month, day)
                     }
-                    "Escolher Data" -> {
+                    "Custom date" -> {
+                        sp_notification_period.adapter = NotificationSpinnerAdapter(
+                            requireContext(), array, "Custom"
+                        )
                         openDatePicker()
                     }
                 }
